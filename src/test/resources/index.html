@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Automation Test Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <style>
+      input{
+        visibility:visible;
+      }
+      .hide{
+        visibility:hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>This page contains a bunch of random elements to test automation against.</h1>
+
+    <form>
+      <br>        
+      <input id="firstId" type ="text" name="first" value = "" placeholder="First Name">   
+      <a href="#" onclick="document.getElementById('firstId').style.visibility = 'visible'">Show</a> |
+      <a href="#" onclick="document.getElementById('firstId').style.visibility = 'hidden'">Hide</a> |                
+      <a href="#" onclick="document.getElementById('firstId').disabled = false">Enable</a>  |        
+      <a href="#" onclick="document.getElementById('firstId').disabled = 'disabled'">Disable</a> 
+      <br>
+      <input id="lastId" type ="text" name="last" value = "" placeholder="Last Name">     
+      <br>
+      <br>
+      <br>
+
+      Disabled Control :  <input id="disabled" type ="text" name="last" disabled ="disabled">     <br><br>
+      Invisible Control :  <input class = "hide" >     <br><br>
+
+      <input type="submit" value="Submit Button" />
+    </form>
+    <br>
+
+
+    <p>Table of elements with various data-test attributes </p>
+    <table border = '1'>
+      <tr><td data-test="A Z">A</td><td>This is row A Z.</td></tr>
+      <tr><td data-test="B Z">B</td><td>This is row B X.</td></tr>
+      <tr><td data-test="C Z">C</td><td>This is row C Z.</td></tr>
+      <tr><td data-test="D X">D</td><td>This is row D X.</td></tr>
+      <tr><td data-test="E X">E</td><td>This is row E X.</td></tr>
+      <tr><td data-test="F Y">F</td><td>This is row F Y.</td></tr>
+      <tr><td data-test="G L">G</td><td>This is row G L.</td></tr>
+    </table>
+
+    <p>		Another Table of combinations. </p>
+    <table border = '1'>
+      <tr><td data-test="A B">A</td><td>This is row A B.</td></tr>
+      <tr><td data-test="B C">B</td><td>This is row B C.</td></tr>
+    </table>
+
+
+    <p>List of Fruit Links</p>
+    <ol id="fruitList">
+      <li><a href="apple.html">Apple</a></li>
+      <li><a href="orange.html">Orange</a></li>
+      <li><a href="grape.html">Grape</a></li>
+      <li><a href="watermelon.html">Watermelon</a></li>
+
+      <li>Kiwi</li>
+      <li>Strawberry</li>
+    </ol>
+
+
+    <a href="#" onclick="alert('Message Here');">This is a javascript only link that calls an alert</a>
+    <br>
+    <br>
+    <br>
+
+    <a href="apple.html" target="_blank">This link opens apple.html in a new tab.</a>
+
+    <select>
+      <option value="red">Red</option>
+      <option value="green">Green</option>
+      <option value="blue">Blue</option>
+      <option value="orange">Orange</option>
+    </select>
+
+
+  </body>
+</html>

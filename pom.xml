@@ -1,0 +1,226 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.syftkog</groupId>
+  <artifactId>web-test-framework</artifactId>
+  <version>1.7.1</version>
+  <packaging>jar</packaging>
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>Web Automation Framework using Selenium WebDriver, TestNG with Sauce Labs suppport.</description>
+  <url>https://github.com/BenjaminLimb/web-test-framework</url>
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Benjamin Limb</name>
+      <email>benjamin@syftkog.org</email>
+      <organization>syftkog</organization>
+      <organizationUrl>http://syftkog.org</organizationUrl>
+    </developer>
+  </developers>   
+  <scm>
+    <connection>scm:git:git@github.com:benjaminlimb/we-test-framework.git</connection>
+    <developerConnection>scm:git:git@github.com:benjaminlimb/web-test-framework.git</developerConnection>
+    <url>https://github.com/benjaminlimb/web-test-framework</url>
+  </scm>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <java.compiler.version>1.7</java.compiler.version>
+    <slf4j-api.version>1.7.7</slf4j-api.version>
+    
+    <logback-classic.version>1.1.2</logback-classic.version>
+    <selenium-java.version>2.43.1</selenium-java.version>
+    <sauce_testng.version>2.1.9</sauce_testng.version>
+    <testng.version>6.8</testng.version>
+    <mockito-all.version>1.8.4</mockito-all.version>    
+    <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
+  </properties>
+  
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j-api.version}</version>
+      </dependency>
+      <dependency>      
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback-classic.version}</version>
+        <scope>test</scope>
+      </dependency>       
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>${selenium-java.version}</version>        
+      </dependency>
+      <dependency>
+        <groupId>com.saucelabs</groupId>
+        <artifactId>sauce_testng</artifactId>
+        <version>${sauce_testng.version}</version>         
+      </dependency>
+      <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>${testng.version}</version>      
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
+        <version>${mockito-all.version}</version>
+      </dependency>          
+      
+    </dependencies> 
+  </dependencyManagement>
+  
+  <dependencies>               
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>      
+    </dependency>
+    <dependency>      
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>      
+      <scope>test</scope>
+    </dependency>    
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>            
+    </dependency>
+    <dependency>
+      <groupId>com.saucelabs</groupId>
+      <artifactId>sauce_testng</artifactId>           
+    </dependency>               
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>      
+    </dependency>
+    
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>      
+    </dependency>                       
+       
+  </dependencies>
+  <build>    
+    <!--    <finalName>web-test-framework</finalName>-->
+    <plugins>            
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+            
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>          
+          <suiteXmlFiles>
+            <suiteXmlFile>${project.build.testOutputDirectory}/testng-unit.xml</suiteXmlFile>             
+          </suiteXmlFiles>                                       
+          <systemPropertyVariables>                                                 
+            <saucelabs.username>${saucelabs.username}</saucelabs.username>
+            <saucelabs.accessKey>${saucelabs.accessKey}</saucelabs.accessKey>                      
+            <logFilePath>${logFilePath}</logFilePath>                                                              
+          </systemPropertyVariables>          
+        </configuration>
+      </plugin>
+              
+    </plugins>      
+  </build>   
+     
+  <profiles>
+     
+    
+    <profile> 
+      <id>release</id>
+<!--      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>-->
+      <build>
+        <plugins>        
+                    
+          <!-- http://central.sonatype.org/pages/apache-maven.html-->
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.3</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>   
+          
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.9.1</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!--      http://central.sonatype.org/pages/apache-maven.html-->      
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>        
+      </build>
+    </profile>
+  </profiles>  
+  
+  
+</project>
