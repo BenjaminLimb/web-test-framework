@@ -1,6 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.syftkog</groupId>
   <artifactId>web-test-framework</artifactId>
@@ -121,7 +120,6 @@
        
   </dependencies>
   <build>    
-    <!--    <finalName>web-test-framework</finalName>-->
     <plugins>            
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -157,12 +155,8 @@
     
     <profile> 
       <id>release</id>
-<!--      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>-->
       <build>
-        <plugins>        
-                    
+        <plugins>                            
           <!-- http://central.sonatype.org/pages/apache-maven.html-->
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
@@ -221,6 +215,4 @@
       </build>
     </profile>
   </profiles>  
-  
-  
 </project>

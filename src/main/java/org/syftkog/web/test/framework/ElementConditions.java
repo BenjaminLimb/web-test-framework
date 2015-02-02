@@ -162,17 +162,18 @@ public class ElementConditions {
             return true;
           }
         }
-        
-        //TODO: TEST THE IMPACT OF THIS ADDITION
-        String elementSelectValue = el.getSelectboxValue();
-        if (elementSelectValue != null) {
-          elementValueText = elementValueText.toLowerCase();
-          if (elementValueText.equalsIgnoreCase(textExpected)) {
-            return true;
-          }
-        }
-        
-        
+
+        //TODO: IS THIS EVEN NEEDED?
+//        if (el.getTagName().equalsIgnoreCase("select")) {          
+//          String elementSelectValue = el.getSelectboxValue();
+//          if (elementSelectValue != null) {
+//            elementSelectValue = elementSelectValue.toLowerCase();
+//            if (elementSelectValue.equalsIgnoreCase(textExpected)) {
+//              return true;
+//            }
+//          }
+//        }
+
         return false;
       }
 

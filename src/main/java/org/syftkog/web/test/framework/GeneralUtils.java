@@ -3,10 +3,12 @@ package org.syftkog.web.test.framework;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  *
@@ -90,6 +92,20 @@ public class GeneralUtils {
       }
     }
 
+   /**
+    * 
+    * @param text
+    * @return 
+    */
+   public String urlEncode(String text) {
+    try {
+      text = URLEncoder.encode(text, "UTF-8");
+      text = text.replaceAll("\\+", "%20");
+      return text;
+    } catch (UnsupportedEncodingException ex) {
+      throw new RuntimeException(ex);
+    }
+  }
   
 
 }
