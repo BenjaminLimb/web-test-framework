@@ -65,7 +65,6 @@ public class ElementList<T extends Element> extends AbstractSequentialList<T> {
         this.searchContext = hasSearchContext.getSearchContext();
         this.factory = factory;
         this.baseName = baseName;
-
         this.listSelector = listSelector;
         this.patternSelector = patternSelector;
     }
@@ -105,7 +104,7 @@ public class ElementList<T extends Element> extends AbstractSequentialList<T> {
                     return getWebElement(elementIndex);
                 }
             };
-
+            
             T child = factory.make(hasDriver, hasSearchContext, baseName, selector, webElementList.get(i), finder);
 
             children.add(child);

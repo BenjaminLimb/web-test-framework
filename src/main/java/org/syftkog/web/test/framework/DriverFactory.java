@@ -78,7 +78,6 @@ public class DriverFactory implements HasDriver {
 
   //SAUCE LABS CONFIGURATION
   //https://docs.saucelabs.com/reference/test-configuration/#maximum-test-duration
-    
   private final static Boolean RECORD_VIDEO = PropertiesRetriever.getBoolean("saucelabs.recordVideo", false);
   private final static Boolean VIDEO_UPLOAD_ON_PASS = PropertiesRetriever.getBoolean("saucelabs.videoUploadOnPass", false);
   private final static Integer SAUCE_MAX_DURATION = PropertiesRetriever.getInteger("saucelabs.maxDuration", 1800);
@@ -87,7 +86,6 @@ public class DriverFactory implements HasDriver {
   private final static String SAUCE_USERNAME = PropertiesRetriever.getString("saucelabs.username", null);
   private final static String SAUCE_ACCESS_KEY = PropertiesRetriever.getString("saucelabs.accessKey", null);
 
-  
   private final static String GRID_URL = PropertiesRetriever.getString("driverfactory.grid.url", "http://localhost:4444/wd/hub");
 
   private final static Integer DEFAULT_MAX_DRIVER_COUNT = PropertiesRetriever.getInteger("driverfactory.maxDriverCount", 10);
@@ -128,7 +126,7 @@ public class DriverFactory implements HasDriver {
     this.driverExecutorService = Executors.newCachedThreadPool();
     this.availableDrivers = new ConcurrentHashMap<>();
     this.instantiatedDrivers = new ConcurrentHashMap<>();
-        
+
   }
 
   /**
@@ -157,25 +155,27 @@ public class DriverFactory implements HasDriver {
   private Driver getNewLocalDriver(Capabilities capabilities) {
     String browser = capabilities.getBrowserName();
 
-    WebDriver driver;
+    WebDriver driver = null;
     if (browser.equalsIgnoreCase("firefox")) {
       driver = new FirefoxDriver();
     } else if (browser.equalsIgnoreCase("internet explorer") && IE_DRIVER_PATH != null) {
       driver = new InternetExplorerDriver();
     } else if (browser.equalsIgnoreCase("chrome") && CHROME_DRIVER_PATH != null) {
 
+      ChromeOptions options = new ChromeOptions();
+      //options.setBinary(CHROME_DRIVER_PATH); // THIS DOESN"T WORK
+      System.setProperty("webdriver.chrome.driver",CHROME_DRIVER_PATH);
+      options.addArguments("--start-maximized");
+
       if (CHROME_PROFILE_PATH != null) {
         //TODO: Fix this -  wasn't working as desired 
         String userProfile = CHROME_PROFILE_PATH;
-        ChromeOptions options = new ChromeOptions();
         options.addArguments("user-data-dir=" + userProfile);
-        options.addArguments("--start-maximized");
         // END TODO
-
-        driver = new ChromeDriver(options);
-      } else {
-        driver = new ChromeDriver();
       }
+
+      driver = new ChromeDriver(options);
+
     } else if (browser.equalsIgnoreCase("htmlunit")) {
       driver = new HtmlUnitDriver(true);
     } else if (browser.equalsIgnoreCase("mock")) {
@@ -439,5 +439,5 @@ public class DriverFactory implements HasDriver {
   public DriverRunEnvironment getDriverEnvironment() {
     return driverEnvironment;
   }
-  
+
 }

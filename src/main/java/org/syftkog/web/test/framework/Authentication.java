@@ -1,6 +1,9 @@
 package org.syftkog.web.test.framework;
 
 /**
+ * This class is used for storing and managing authentication credentials. It
+ * has the ability to encrypt and decrypt the password and key although it is a
+ * development in progress and will most likely be changed in the future.
  *
  * @author BenjaminLimb
  */
@@ -23,6 +26,17 @@ public class Authentication {
 
   /**
    *
+   * @param username
+   * @param password
+   */
+  public Authentication(String username, String password) {
+    this.username = username;
+    this.password = password;
+  }
+
+  /**
+   * Encrypt the password using TrippleDES
+   *
    * @param encryptionKey
    */
   public void encrypt(String encryptionKey) {
@@ -32,25 +46,14 @@ public class Authentication {
   }
 
   /**
+   * Decrypt the password using TrippleDES
    *
    * @param encryptionKey
    */
   public void decrypt(String encryptionKey) {
     TrippleDES trippleDES = new TrippleDES(encryptionKey);
-    domain = trippleDES.decrypt(domain);
-    username = trippleDES.decrypt(username);
     password = trippleDES.decrypt(password);
     key = trippleDES.decrypt(key);
-  }
-
-  /**
-   *
-   * @param username
-   * @param password
-   */
-  public Authentication(String username, String password) {
-    this.username = username;
-    this.password = password;
   }
 
   /**
@@ -117,6 +120,10 @@ public class Authentication {
     this.domain = domain;
   }
 
+  /**
+   * Format the credentials for printing. 
+   * @return 
+   */
   @Override
   public String toString() {
     String separator = System.getProperty("line.separator");

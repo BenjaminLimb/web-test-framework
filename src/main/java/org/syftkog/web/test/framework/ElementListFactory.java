@@ -12,14 +12,17 @@ public class ElementListFactory {
 
   /**
    *
-   * @param <T>
-   * @param clazz
-   * @param hasDriver
-   * @param hasSearchContext
-   * @param name
-   * @param listSelector
-   * @param patternSelector
-   * @return
+   * @param <T> - The class type of the elements
+   * @param clazz - The Class that extends Element that that will be used for
+   * each item in the list.
+   * @param hasDriver - A class that has a getDriver() method;
+   * @param hasSearchContext - The search context to look for the elements.
+   * @param name - The name of the element list.
+   * @param listSelector - A css selector used to find all instances of the
+   * elements.
+   * @param patternSelector - A css selector used to find an individual element
+   * instance. Note ### is replaces by the element index starting at 1.
+   * @return - An ElementList of elements found using the css selector.
    */
   public static <T extends Element> ElementList<T> create(final Class clazz, HasDriver hasDriver, HasSearchContext hasSearchContext, String name, String listSelector, String patternSelector) {
     ElementFactory<T> factory = new ElementFactory<T>() {

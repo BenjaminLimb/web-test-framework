@@ -3,7 +3,7 @@
     <test name="unit-tests" junit="false">    
         <groups>          
             <run>       
-                <include name="units"/>
+                <include name="unit"/>
             </run>
         </groups>    
         <packages>            

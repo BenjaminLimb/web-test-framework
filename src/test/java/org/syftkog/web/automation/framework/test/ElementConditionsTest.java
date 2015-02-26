@@ -30,8 +30,8 @@ public class ElementConditionsTest {
   @Test(groups = "unit")
   public void testGetValue() {
     DriverFactory factory = new DriverFactory();
-//    Driver driver = factory.getDriver(DesiredCapabilitiesFactory.htmlunit());
-    Driver driver = factory.getDriver(DesiredCapabilitiesFactory.ff());
+    Driver driver = factory.getDriver(DesiredCapabilitiesFactory.htmlunit());
+    // Driver driver = factory.getDriver(DesiredCapabilitiesFactory.ff());
     LocalTestPage page = new LocalTestPage(driver);
     page.load();
     String text = page.selectBox.getText();

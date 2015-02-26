@@ -32,7 +32,7 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 
 /**
- *
+ * This class used for driving a web browser. It extends the WebDriver to facilitate easier logging and context aware actions.
  * @author BenjaminLimb
  */
 public class Driver implements WebDriver, JavascriptExecutor, WrapsDriver, HasInputDevices, TakesScreenshot, HasDriver, HasStepLogger, HasSearchContext, SauceOnDemandSessionIdProvider {

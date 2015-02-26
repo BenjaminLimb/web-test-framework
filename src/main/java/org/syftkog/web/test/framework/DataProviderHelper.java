@@ -3,13 +3,13 @@ package org.syftkog.web.test.framework;
 import java.util.Set;
 
 /**
- *
+ * This class assists in the creation of a TestNG Data Provider.
  * @author BenjaminLimb
  */
 public class DataProviderHelper {
 
   /**
-   *
+   * Transform a set of objects into a list feed through the DataProvider.
    * @param setA
    * @return
    */
@@ -23,7 +23,7 @@ public class DataProviderHelper {
     }
 
   /**
-   *
+   * Permutate two sets of data objects used to feed the DataProvider. 
    * @param setA
    * @param setB
    * @return

@@ -45,7 +45,7 @@
     <slf4j-api.version>1.7.7</slf4j-api.version>
     
     <logback-classic.version>1.1.2</logback-classic.version>
-    <selenium-java.version>2.43.1</selenium-java.version>
+    <selenium-java.version>2.44.0</selenium-java.version>
     <sauce_testng.version>2.1.9</sauce_testng.version>
     <testng.version>6.8</testng.version>
     <mockito-all.version>1.8.4</mockito-all.version>    
@@ -150,9 +150,7 @@
     </plugins>      
   </build>   
      
-  <profiles>
-     
-    
+  <profiles>         
     <profile> 
       <id>release</id>
       <build>

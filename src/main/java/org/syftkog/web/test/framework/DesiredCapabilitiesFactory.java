@@ -1,5 +1,6 @@
 package org.syftkog.web.test.framework;
 
+import com.sun.jna.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
@@ -39,7 +40,7 @@ public class DesiredCapabilitiesFactory {
      */
     public static DesiredCapabilities ie10() {
         DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-        capabilities.setCapability("platform", "Windows 7");
+        capabilities.setCapability("platform",Platform.WINDOWS);
         capabilities.setCapability("version", "10");
         return capabilities;
     }
@@ -51,7 +52,7 @@ public class DesiredCapabilitiesFactory {
      */
     public static DesiredCapabilities ie11() {
         DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-        capabilities.setCapability("platform", "Windows 7");
+        capabilities.setCapability("platform", Platform.WINDOWS);
         capabilities.setCapability("version", "11");
         return capabilities;
     }
@@ -63,7 +64,7 @@ public class DesiredCapabilitiesFactory {
      */
     public static DesiredCapabilities ff() {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        capabilities.setCapability("platform", "Windows 7");
+        capabilities.setCapability("platform", Platform.WINDOWS);
         // capabilities.setCapability("version", "25");
         return capabilities;
     }
@@ -75,7 +76,7 @@ public class DesiredCapabilitiesFactory {
      */
     public static DesiredCapabilities safari5win() {
         DesiredCapabilities capabilities = DesiredCapabilities.safari();
-        capabilities.setCapability("platform", "Windows 7");
+        capabilities.setCapability("platform", Platform.WINDOWS);
         capabilities.setCapability("version", "5");
         return capabilities;
     }
@@ -87,7 +88,7 @@ public class DesiredCapabilitiesFactory {
      */
     public static DesiredCapabilities chrome() {
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability("platform", "Windows 7");
+        capabilities.setCapability("platform", Platform.WINDOWS);
 //        capabilities.setCapability("version", "35");
         return capabilities;
     }

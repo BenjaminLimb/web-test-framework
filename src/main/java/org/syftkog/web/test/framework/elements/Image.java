@@ -1,8 +1,10 @@
 package org.syftkog.web.test.framework.elements;
 
 import org.syftkog.web.test.framework.Element;
+import org.syftkog.web.test.framework.GeneralUtils;
 import org.syftkog.web.test.framework.HasDriver;
 import org.syftkog.web.test.framework.HasSearchContext;
+import org.testng.Assert;
 
 /**
  *
@@ -10,6 +12,10 @@ import org.syftkog.web.test.framework.HasSearchContext;
  */
 public class Image extends Element<Image> {
 
+  public void assertValidResponseCodeForSrc() {
+    this.logAction("Assert valid http src response code:");
+        Assert.assertTrue(getResponseCodeForSrc() < 400);
+    }
   /**
    *
    * @param driver
@@ -30,4 +36,15 @@ public class Image extends Element<Image> {
   public Image(HasDriver driver, String name, String selector) {
         super(driver, name, selector);
     }
+  
+   /**
+   *
+   * @return
+   */
+  public Integer getResponseCodeForSrc() {
+
+    String src = getAttribute("src");
+    return GeneralUtils.getResponseCode(src);
+
+  }
 }

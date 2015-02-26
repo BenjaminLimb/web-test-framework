@@ -13,28 +13,36 @@ import org.testng.annotations.Test;
  */
 public class DriverFactoryTest {
 
-    DriverFactory factory = new DriverFactory();
+  DriverFactory factory = new DriverFactory();
 
   /**
    *
    */
   @Test(groups = "unit")
-    public void testGetDriver() {
-        WebDriver driver = factory.getDriver();
-        Assert.assertNotNull(driver);
-        driver.quit();
-    }
+  public void testGetDriver() {
+    WebDriver driver = factory.getDriver();
+    Assert.assertNotNull(driver);
+    driver.quit();
+  }
+
+  @Test(groups = "local")
+  public void testGetDriverChrome() {
+    DesiredCapabilities caps = DesiredCapabilitiesFactory.chrome();    
+    WebDriver driver = factory.getDriver(caps);
+    Assert.assertNotNull(driver);
+    driver.quit();
+  }
 
   /**
    *
    */
   @Test(groups = "unit")
-    public void testGetDriverWithCapabilitites() {
-        DesiredCapabilities caps = DesiredCapabilitiesFactory.htmlunit();
+  public void testGetDriverWithCapabilitites() {
+    DesiredCapabilities caps = DesiredCapabilitiesFactory.htmlunit();
 
-        WebDriver driver = factory.getDriver(caps);
-        Assert.assertNotNull(driver);
-        driver.quit();
-    }
+    WebDriver driver = factory.getDriver(caps);
+    Assert.assertNotNull(driver);
+    driver.quit();
+  }
 
 }
