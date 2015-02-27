@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.syftkog.misc;
+package org.syftkog.web.automation.framework.test;
 
 import org.syftkog.web.test.framework.PropertiesRetriever;
 import org.testng.Assert;

@@ -788,10 +788,9 @@ public class Element<T extends Element> implements Locatable, WrapsElement, Sear
           initializeElementIfNull();
           return commandsToRun();
         } catch (StaleElementReferenceException ex) {
-          getDriver().getStepLogger().log(WARN, "StaleElementReferenceException - Refresh element to increase performance. " + parentToString());
-          initializeElement();
-          return commandsToRun();
-        } catch (InvalidElementStateException | InvalidCookieDomainException | NotFoundException | UnableToSetCookieException ex) {
+          getDriver().getStepLogger().log(WARN, "StaleElementReferenceException - Refresh element to increase performance. " + parentToString());          
+          element = null; // Since it's stale, we clear it and let it start the loop over immediately        
+        } catch (InvalidElementStateException | InvalidCookieDomainException | NotFoundException  | UnableToSetCookieException ex) {
           getDriver().getStepLogger().log(WARN, parentToString() + "\n" + ex.toString());
           Driver.sleepForMilliseconds(ELEMENT_RETRY_INTERVAL_MILLISECONDS);
         } catch (WebDriverException ex) {

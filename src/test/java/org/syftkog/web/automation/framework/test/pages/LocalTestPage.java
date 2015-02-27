@@ -15,9 +15,12 @@
  */
 package org.syftkog.web.automation.framework.test.pages;
 
+import org.syftkog.web.test.framework.ElementList;
+import org.syftkog.web.test.framework.ElementListFactory;
 import org.syftkog.web.test.framework.GeneralUtils;
 import org.syftkog.web.test.framework.HasDriver;
 import org.syftkog.web.test.framework.Page;
+import org.syftkog.web.test.framework.elements.Container;
 import org.syftkog.web.test.framework.elements.Selectbox;
 import org.syftkog.web.test.framework.elements.Textbox;
 
@@ -36,6 +39,8 @@ public class LocalTestPage extends Page {
   public Selectbox selectBox = new Selectbox(this, "Select box", "select");
   public Textbox first = new Textbox(this,"Textbox","#firstId");
 
+  public ElementList<Container> fruitsWithoutPattern = ElementListFactory.create(Container.class, this, "Fruit List Item", "#fruitList li a");
+  public ElementList<Container> fruits = ElementListFactory.create(Container.class, this, "Fruit List Item", "#fruitList li a", "#fruitList li:nth-of-type(###) a");
   /**
    *
    * @param hasDriver

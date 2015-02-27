@@ -35,19 +35,19 @@ public class ElementList<T extends Element> extends AbstractSequentialList<T> {
    *
    */
   public static final long IMPLICIT_WAIT_TIME_IN_SECONDS = Long.parseLong(PropertiesRetriever.getString("element.implicitWaitTimeInSeconds", "10"));
-    private List<T> elementList = null;
-    private List<WebElement> webElementList = null;
-    private final ElementFactory<T> factory;
+  private List<T> elementList = null;
+  private List<WebElement> webElementList = null;
+  private final ElementFactory<T> factory;
 
-    private final String listSelector;
-    private final String patternSelector;
+  private final String listSelector;
+  private final String patternSelector;
 
-    private final String baseName;
+  private final String baseName;
 
-    private final HasDriver hasDriver;
-    private final Driver driver;
-    private final HasSearchContext hasSearchContext;
-    private final SearchContext searchContext;
+  private final HasDriver hasDriver;
+  private final Driver driver;
+  private final HasSearchContext hasSearchContext;
+  private final SearchContext searchContext;
 
   /**
    *
@@ -59,106 +59,104 @@ public class ElementList<T extends Element> extends AbstractSequentialList<T> {
    * @param patternSelector
    */
   public ElementList(ElementFactory<T> factory, HasDriver hasDriver, HasSearchContext hasSearchContext, String baseName, String listSelector, String patternSelector) {
-        this.hasDriver = hasDriver;
-        this.driver = hasDriver.getDriver();
-        this.hasSearchContext = hasSearchContext;
-        this.searchContext = hasSearchContext.getSearchContext();
-        this.factory = factory;
-        this.baseName = baseName;
-        this.listSelector = listSelector;
-        this.patternSelector = patternSelector;
-    }
+    this.hasDriver = hasDriver;
+    this.driver = hasDriver.getDriver();
+    this.hasSearchContext = hasSearchContext;
+    this.searchContext = hasSearchContext.getSearchContext();
+    this.factory = factory;
+    this.baseName = baseName;
+    this.listSelector = listSelector;
+    this.patternSelector = patternSelector;
+  }
 
-    private ElementList initialize() {
-        if (elementList == null) {
-            elementList = findAndCreateChildren();
-        }
-        Assert.assertNotNull(elementList);
-        return this;
+  private ElementList initialize() {
+    if (elementList == null) {
+      elementList = findAndCreateChildren();
     }
+    Assert.assertNotNull(elementList);
+    return this;
+  }
 
   /**
-   * TODO: This is a hack.. It would be better for the object to just deal with stale elements.      
+   * TODO: This is a hack.. It would be better for the object to just deal with
+   * stale elements.
+   *
    * @return
    */
   public ElementList reInitialize() {
-        this.elementList = findAndCreateChildren();
-        return this;
-    }
+    this.elementList = findAndCreateChildren();
+    return this;
+  }
 
-    private List<T> findAndCreateChildren() {
-        webElementList = searchContext.findElements(By.cssSelector(listSelector));
+  private List<T> findAndCreateChildren() {
+    webElementList = searchContext.findElements(By.cssSelector(listSelector));
 
-        List<T> children = new ArrayList<>();
-        for (int i = 0; i < webElementList.size(); i++) {
-            String selector = patternSelector;
-            if (selector != null) {
-                selector = selector.replace("###", String.valueOf(i + 1));
-            }
-            
-            // Create a way for the element to find itself again in the list if it becomes stale such as in the case of a page refresh.
-            final int elementIndex = i;
-            WebElementFinder finder = new WebElementFinder() {
-                @Override
-                public WebElement find() {
-                    return getWebElement(elementIndex);
-                }
-            };
-            
-            T child = factory.make(hasDriver, hasSearchContext, baseName, selector, webElementList.get(i), finder);
+    List<T> children = new ArrayList<>();
+    for (int i = 0; i < webElementList.size(); i++) {
+      String selector = patternSelector;
+      if (selector != null) {
+        selector = selector.replace("###", String.valueOf(i + 1));
+      }
 
-            children.add(child);
+      // Create a way for the element to find itself again in the list if it becomes stale such as in the case of a page refresh.
+      final int elementIndex = i;
+      WebElementFinder finder = new WebElementFinder() {
+        @Override
+        public WebElement find() {        
+          reInitialize();
+          return getWebElement(elementIndex);
         }
-        return children;
-    }
+      };
 
-    @Override
-    public int size() {
-        reInitialize();
-        return elementList.size();
-    }
+      T child = factory.make(hasDriver, hasSearchContext, baseName, selector, webElementList.get(i), finder);
 
-    private WebElement getWebElement(final int index) {
-        return new webDriverRetryUntilTimeout<WebElement>() {
-            @Override
-            WebElement commandsToRun() {
-                if (index >= webElementList.size()) {
-                    throw new NoSuchElementException("('" + listSelector + "[" + index + "]')");
-                } else {                  
-                    return webElementList.get(index);
-                }
-            }
-        }.run();
+      children.add(child);
     }
+    return children;
+  }
 
-    @Override
-    public T get(final int index) {
-        return new webDriverRetryUntilTimeout<T>() {
-            @Override
-            T commandsToRun() {
-                if (index >= elementList.size()) {
-                    throw new NoSuchElementException("('" + listSelector + "[" + index + "]')");
-                } else {
-                    
-                  T gElement = elementList.get(index);
-                  try{
-                    gElement.isDisplayed();
-                  }catch(Exception ex){
-                    System.out.println();
-                  }
-                    return gElement;
-                }
-            }
-        }.run();
-    }
+  @Override
+  public int size() {
+    reInitialize();
+    return elementList.size();
+  }
+
+  private WebElement getWebElement(final int index) {
+    return new webDriverRetryUntilTimeout<WebElement>() {
+      @Override
+      WebElement commandsToRun() {
+        if (index >= webElementList.size()) {
+          throw new NoSuchElementException("('" + listSelector + "[" + index + "]')");
+        } else {
+          return webElementList.get(index);
+        }
+      }
+    }.run();
+  }
+
+  @Override
+  public T get(final int index) {
+    return new webDriverRetryUntilTimeout<T>() {
+      @Override
+      T commandsToRun() {
+        if (index >= elementList.size()) {
+          throw new NoSuchElementException("('" + listSelector + "[" + index + "]')");
+        } else {
+          T gElement = elementList.get(index);
+           
+          return gElement;
+        }
+      }
+    }.run();
+  }
 
   /**
    *
    * @return
    */
   public T chooseRandom() {
-        return chooseRandom(1).get(0);
-    }
+    return chooseRandom(1).get(0);
+  }
 
   /**
    *
@@ -166,17 +164,17 @@ public class ElementList<T extends Element> extends AbstractSequentialList<T> {
    * @return
    */
   public List<T> chooseRandom(final int count) {
-        get(count - 1); // make sure all are present.
-        if (count > size()) {
-            throw new NoSuchElementException("('" + listSelector + " contains " + elementList.size() + " however you asked elements up to index [" + count + "]')");
-        } else {
-            List<T> randomList = new ArrayList<T>();
-            randomList.addAll(elementList);
-            Collections.shuffle(randomList);
-            return randomList.subList(0, count);
-        }
-
+    get(count - 1); // make sure all are present.
+    if (count > size()) {
+      throw new NoSuchElementException("('" + listSelector + " contains " + elementList.size() + " however you asked elements up to index [" + count + "]')");
+    } else {
+      List<T> randomList = new ArrayList<T>();
+      randomList.addAll(elementList);
+      Collections.shuffle(randomList);
+      return randomList.subList(0, count);
     }
+
+  }
 
   /**
    *
@@ -184,47 +182,41 @@ public class ElementList<T extends Element> extends AbstractSequentialList<T> {
    * @return
    */
   public T getByContainsText(final String text) {
-        Assert.assertNotNull(text, "text cannot be null.");
-        driver.logStep("FIND BY TEXT" + " : \"" + text + "\"");
-        return new webDriverRetryUntilTimeout<T>() {
-            @Override
-            T commandsToRun() {
-                for (T el : elementList) {
-                    String elText = el.getText();
-                    if (elText != null && elText.contains(text)) {
-                      
-                      
-                      
-                      
-                      
-                      
-                        return el;
-                    }
-                }
-                elementList = null; // reset the children if not found.
-                throw new NoSuchElementException("d" + listSelector + " with text \"" + text + "\"");
-            }
-        }.run();
+    Assert.assertNotNull(text, "text cannot be null.");
+    driver.logStep("FIND BY TEXT" + " : \"" + text + "\"");
+    return new webDriverRetryUntilTimeout<T>() {
+      @Override
+      T commandsToRun() {
+        for (T el : elementList) {
+          String elText = el.getText();
+          if (elText != null && elText.contains(text)) {
+            return el;
+          }
+        }
+        elementList = null; // reset the children if not found.
+        throw new NoSuchElementException("d" + listSelector + " with text \"" + text + "\"");
+      }
+    }.run();
 
-    }
+  }
 
-    @Override
-    public ListIterator<T> listIterator(int index) {
-        return new webDriverRetryUntilTimeout<ListIterator<T>>() {
-            @Override
-            ListIterator<T> commandsToRun() {
-                return elementList.listIterator();
-            }
-        }.run();
-    }
+  @Override
+  public ListIterator<T> listIterator(int index) {
+    return new webDriverRetryUntilTimeout<ListIterator<T>>() {
+      @Override
+      ListIterator<T> commandsToRun() {
+        return elementList.listIterator();
+      }
+    }.run();
+  }
 
   /**
    *
    * @return
    */
   public SearchContext getSearchContext() {
-        return searchContext;
-    }
+    return searchContext;
+  }
 
   /**
    *
@@ -237,47 +229,47 @@ public class ElementList<T extends Element> extends AbstractSequentialList<T> {
      * @return
      */
     public T run() {
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            long timeout = System.currentTimeMillis() + IMPLICIT_WAIT_TIME_IN_SECONDS * 1000;
+      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+      long timeout = System.currentTimeMillis() + IMPLICIT_WAIT_TIME_IN_SECONDS * 1000;
 
-            while (System.currentTimeMillis() < timeout) {
-                try {
-                    initialize();
-                    return commandsToRun();
-                } catch (NotFoundException ex) {
-                    driver.getStepLogger().log(WARN, parentToString() + "\n" + ex.toString());
-                    elementList = null; // Reset the list on failure to find.
-                    Driver.sleepForMilliseconds(100);
-                } catch (WebDriverException ex) {
-                    driver.getStepLogger().log(WARN, parentToString() + "\n" + ex.toString());
-                    elementList = null;
-                    Driver.sleepForMilliseconds(100);
-                }
-            }
-
-            //Last Try before timeout and rethrow
-            try {
-                initialize();
-                return commandsToRun();
-            } catch (WebDriverException ex) {
-                throw new TimeoutException(ex);
-            }
+      while (System.currentTimeMillis() < timeout) {
+        try {
+          initialize();
+          return commandsToRun();
+        } catch (NotFoundException ex) {
+          driver.getStepLogger().log(WARN, parentToString() + "\n" + ex.toString());
+          elementList = null; // Reset the list on failure to find.
+          Driver.sleepForMilliseconds(100);
+        } catch (WebDriverException ex) {
+          driver.getStepLogger().log(WARN, parentToString() + "\n" + ex.toString());
+          elementList = null;
+          Driver.sleepForMilliseconds(100);
         }
+      }
 
-        abstract T commandsToRun();
+      //Last Try before timeout and rethrow
+      try {
+        initialize();
+        return commandsToRun();
+      } catch (WebDriverException ex) {
+        throw new TimeoutException(ex);
+      }
     }
+
+    abstract T commandsToRun();
+  }
 
   /**
    *
    * @return
    */
   public String parentToString() {
-        return toString();
-    }
+    return toString();
+  }
 
-    @Override
-    public String toString() {
-        return "ElementList:\"" + this.baseName + "\" ListSelector:\"" + this.listSelector + "\" PatternSelector:\"" + this.patternSelector + "\"";
-    }
+  @Override
+  public String toString() {
+    return "ElementList:\"" + this.baseName + "\" ListSelector:\"" + this.listSelector + "\" PatternSelector:\"" + this.patternSelector + "\"";
+  }
 
 }
