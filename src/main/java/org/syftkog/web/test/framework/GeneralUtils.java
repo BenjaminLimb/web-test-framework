@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import org.testng.ITestResult;
 
 /**
  *
@@ -106,6 +107,27 @@ public class GeneralUtils {
       throw new RuntimeException(ex);
     }
   }
+   
+   public static String statusToString(int status) {
+    switch (status) {
+      case ITestResult.SUCCESS:
+        return "SUCCESS";
+      case ITestResult.FAILURE:
+        return "FAILURE";
+      case ITestResult.SKIP:
+        return "SKIP";
+      case ITestResult.SUCCESS_PERCENTAGE_FAILURE:
+        return "SUCCESS WITHIN PERCENTAGE";
+      case ITestResult.STARTED:
+        return "STARTED";
+      default:
+        throw new RuntimeException("Could not interpret Result Status.");
+    }
+  }
+   
+   
+   
+ 
   
 
 }

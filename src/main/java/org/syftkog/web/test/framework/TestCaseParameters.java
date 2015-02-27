@@ -138,7 +138,7 @@ public class TestCaseParameters implements TagContext {
    * @return
    */
   public String getPlatform() {
-    return (String) getParameter("platform");
+    return  getParameter("platform").toString();
   }
 
   /**
