@@ -1,115 +1,91 @@
+#set ( $dollar_symbol = '$' )
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-   
-    <groupId>${groupId}</groupId>
-    <artifactId>${artifactId}</artifactId>
-    <version>${version}</version>
-    <packaging>jar</packaging>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <name>web-test-framework based UI Testing App</name>
+  <packaging>jar</packaging>
+  <version>${version}</version>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.compiler.version>1.7</java.compiler.version>        
-    </properties>
+  <properties>
+    <java.compiler.version>1.7</java.compiler.version>
+    <slf4j-api.version>1.7.7</slf4j-api.version>
+    <logback-classic.version>1.1.2</logback-classic.version>
+    <selenium-java.version>2.45.0</selenium-java.version>
+    <sauce_testng.version>2.1.9</sauce_testng.version>
+    <testng.version>6.8</testng.version>
+    <mockito-all.version>1.8.4</mockito-all.version>    
+    <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
     
-    <dependencies>    
-        <dependency>
-            <groupId>com.syftkog</groupId>
-            <artifactId>web-test-framework</artifactId>
-            <version>1.0</version>
-        </dependency>       
-    </dependencies>
+    <web-test-framework.version>1.7.5</web-test-framework.version>       
+  </properties>
+
+  <build>
+    <finalName>${artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.16</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>${project.build.testOutputDirectory}/testng-acceptance.xml</suiteXmlFile>
+          </suiteXmlFiles>
+          <properties>
+            <property>
+              <name>listener</name>
+<!--              org.syftkog.web.test.framework.SauceListener-->
+              <value>org.syftkog.web.test.framework.TestCaseListener, org.syftkog.web.test.framework.DriverManagerListener, org.syftkog.web.test.framework.retry.RetryTestListener</value>
+            </property>
+          </properties>
+          <systemPropertyVariables>
+            <environments.production.default.host>https://syftkog.org</environments.production.default.host>
+            <environments.beta.default.host>https://beta.syftkog.org</environments.beta.default.host>
+            <environments.integration.default.host>https://integration.syftkog.org</environments.integration.default.host>
+            <environments.staging.default.host>https://staging.syftkog.org</environments.staging.default.host>
+            <environments.development.default.host>http://localhost:5000/</environments.development.default.host>
+
+            <propertiesDataProvider.browsersToTest>ff</propertiesDataProvider.browsersToTest>
+            <propertiesDataProvider.languagesToTest>en</propertiesDataProvider.languagesToTest>
+            <propertiesDataProvider.windowDimensionsToTest></propertiesDataProvider.windowDimensionsToTest>
+            <propertiesDataProvider.environment>beta</propertiesDataProvider.environment>
+            <propertiesDataProvider.authenticate>false</propertiesDataProvider.authenticate>
+<!--            <propertiesDataProvider.authentication.username></propertiesDataProvider.authentication.username>-->
+<!--            <propertiesDataProvider.authentication.password></propertiesDataProvider.authentication.password>-->
+<!--            <propertiesDataProvider.authentication.key></propertiesDataProvider.authentication.key>-->
+
+            <driverfactory.environment>LOCAL</driverfactory.environment> <!-- SAUCE OR GRID OR  MIXED OR LOCAL -->
+            <driverfactory.recycle>false</driverfactory.recycle>
+            <driverfactory.maxDriverCount>20</driverfactory.maxDriverCount>
+
+            <driver.implicitWaitTimeInSeconds>30</driver.implicitWaitTimeInSeconds>
+            <element.implicitWaitTimeInSeconds>30</element.implicitWaitTimeInSeconds>
+            
+            <saucelabs.username></saucelabs.username>
+            <saucelabs.accessKey></saucelabs.accessKey>
+            
+          </systemPropertyVariables>          
+        </configuration>
+      </plugin>      
+    </plugins>
+  </build>
+  
+  <dependencies>   
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback-classic.version}</version>
+    </dependency>
     
-    <build>    
-        <finalName>${name}</finalName>                      
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.16</version>
-                <configuration>           
-                    <suiteXmlFiles>
-                        <suiteXmlFile>${project.build.testOutputDirectory}/testng-acceptance.xml</suiteXmlFile>             
-                    </suiteXmlFiles>
-                    <properties>                                
-                        <property>
-                            <name>listener</name>
-                            <value>com.syftkog.web.test.framework.TestCaseListener,com.syftkog.web.test.framework.DriverManagerListener,com.syftkog.web.test.framework.retry.RetryTestListener</value>
-                        </property>
-                    </properties>                       
-                    <systemPropertyVariables>      
-                        
-                        <!-- Sauce Labs Settings -->
-                        <SAUCE_USER_NAME>${SAUCE_USER_NAME}</SAUCE_USER_NAME>
-                        <SAUCE_API_KEY>${SAUCE_API_KEY}</SAUCE_API_KEY>                        
-                        <!--  See DriverFactory.java for additional settings-->
-                        
-                        <!-- Data Provider Settings -->
-                        <browsersToTest></browsersToTest> <!-- ff,chrome,ie10,ie11,htmlunit see DesiredCapabilitiesFactory.java-->
-                        <languagesToTest></languagesToTest> <!-- DE,PT,EN,RU,ES,JA,FR,KO,IT,ZH,EO  see Language.java-->
-                        <windowDimensionsToTest></windowDimensionsToTest> <!-- format example "800x600" or comma delimited "800x600,1024,768" -->
-                        
-                        <!-- Driver Factory Settings -->
-                        <driverfactory.maxDriverCount>10</driverfactory.maxDriverCount>
-                        
-                        <!-- Retry Settings -->
-                        <retry.maxRetryCount>2</retry.maxRetryCount>       <!--  The number of time to try and run the test until it succeeds. -->        
-                         
-                        <!-- Reference Settings -->
-                        <reference.production.host></reference.production.host>
-                        <reference.beta.host></reference.beta.host>
-                        <reference.integration.host></reference.integration.host>
-                        <reference.sandbox.host></reference.sandbox.host>
-                                                 
-                    </systemPropertyVariables>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>      
-    <profiles>        
-        <profile>
-            <id>betaAcceptance</id>                  
-            <build>           
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.16</version>
-                        <configuration>   
-                            <suiteXmlFiles>
-                                <suiteXmlFile>${project.build.testOutputDirectory}/testng-acceptance.xml</suiteXmlFile>             
-                            </suiteXmlFiles>                           
-                            <systemPropertyVariables>                                                               
-                                <driverEnvironment>LOCAL</driverEnvironment> <!-- SAUCE OR LOCAL -->            
-                                <reference>BETA</reference> <!-- SANDBOX, INTEGRATION, BETA, PRODUCTION  -->                                                                              
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>     
-        </profile>
-        <profile>
-            <id>betaRegression</id>            
-            <build>           
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.16</version>
-                        <configuration>   
-                            <suiteXmlFiles>
-                                <suiteXmlFile>${project.build.testOutputDirectory}/testng-regression.xml</suiteXmlFile>             
-                            </suiteXmlFiles>
-                               
-                            <systemPropertyVariables>
-                                <driverEnvironment>LOCAL</driverEnvironment> <!-- SAUCE OR LOCAL -->            
-                                <reference>PRODUCTION</reference> <!-- SANDBOX, INTEGRATION, BETA, PRODUCTION  -->              
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>  
-        </profile>                            
-    </profiles>
-    
+    <dependency>
+      <groupId>org.syftkog</groupId>
+      <artifactId>web-test-framework</artifactId>
+      <version>${web-test-framework.version}</version>      
+    </dependency>    
+      
+  </dependencies>
+
 </project>

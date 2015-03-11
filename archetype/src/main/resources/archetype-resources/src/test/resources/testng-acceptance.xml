@@ -1,17 +1,22 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
+#set ( $dollar_symbol = '$' )
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Example UI Acceptance Tests" parallel="methods" thread-count="15">   
-    <test name="Example Acceptance Tests" junit="false">    
+<suite name="Example Tests" parallel="methods" thread-count="5">   
+  
+  <listeners>
+     <listener class-name="org.syftkog.web.test.framework.TestCaseListener"/>
+<!--     <listener class-name="org.syftkog.web.test.framework.SauceListener"/>-->
+     <listener class-name="org.syftkog.web.test.framework.DriverManagerListener"/>
+     <listener class-name="org.syftkog.web.test.framework.retry.RetryTestListener"/>
+  </listeners>
+    <test name="example-tests" junit="false">    
         <groups>          
             <run>       
                 <include name="acceptance"/>
             </run>
         </groups>    
         <packages>
-            <package name="${groupId}.tests"/>      
+            <package name="${package}.tests.*"/>      
         </packages>
     </test>  
 </suite>

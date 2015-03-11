@@ -1,44 +1,36 @@
-<!-- Licensed under the Apache License, Version 2.0 (the "License"); you 
-may not use this file except in compliance with the License. You may obtain 
-a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless 
-required by applicable law or agreed to in writing, software distributed 
-under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
-OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
-the specific language governing permissions and limitations under the License. -->
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.syftkog</groupId>
-    <artifactId>web-test-archetype</artifactId>
-    <version>0.0.1</version>
-    <name>Web Test QuickStart Archetype</name>   
-    <packaging>jar</packaging> 
-    
-<!--    http://maven.apache.org/guides/mini/guide-creating-archetypes.html-->
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
+    <groupId>org.syftkog.archetype</groupId>
+    <artifactId>web-test-framework-archetype</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>maven-archetype</packaging>
+    <name>web-test-framework-archetype</name>
+    <description>Initial project for a basic web-test-framework test suite.</description>
+   <scm>
+        <url>https://github.com/BenjaminLimb/web-test-framework-archetype</url>
+        <connection>scm:git:git@github.com:BenjaminLimb/web-test-framework-archetype.git</connection>
+        <developerConnection>scm:git:git@github.com:BenjaminLimb/web-test-framework-archetype.git</developerConnection>
+    </scm>
+   
+    <properties>
+      <java.compiler.version>1.7</java.compiler.version>
+    </properties>
     <build>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
                 <artifactId>archetype-packaging</artifactId>
-                <version>2.1</version>
+                <version>2.2</version>
             </extension>
         </extensions>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-archetype-plugin</artifactId>
-                    <version>2.1</version>
-                    <extensions>true</extensions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>    
-      
+        <plugins>
+            <plugin>
+                <artifactId>maven-archetype-plugin</artifactId>
+                <version>2.2</version>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
