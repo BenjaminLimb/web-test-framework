@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>  
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date %level %thread %msg%n</pattern>
+        </encoder>
+    </appender>  
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${logFilePath}</file>
+        <encoder>
+            <pattern>date="%date", level="%level", logger="%logger", %msg%n</pattern>
+        </encoder>
+    </appender>
+   
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

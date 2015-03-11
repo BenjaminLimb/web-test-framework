@@ -140,7 +140,7 @@ public enum Language {
    * @param twoLetterCode
    * @return
    */
-  public static Language getFromTwoLetterCode(String twoLetterCode) {
+  private static Language getFromTwoLetterCode(String twoLetterCode) {
         return twoLetterCodeMap.get(twoLetterCode.toLowerCase());
     }
 
@@ -149,7 +149,7 @@ public enum Language {
    * @param twoLetterCodes
    * @return
    */
-  public static List<Language> getFromTwoletterCodes(String... twoLetterCodes) {
+  private static List<Language> getFromTwoletterCodes(String... twoLetterCodes) {
         ArrayList<Language> results = new ArrayList<Language>();
         for (String code : twoLetterCodes) {
             results.add(getFromTwoLetterCode(code.toLowerCase()));
@@ -162,7 +162,7 @@ public enum Language {
    * @param threeLetterCode
    * @return
    */
-  public static Language getFromThreeLetterCode(String threeLetterCode) {
+  private static Language getFromThreeLetterCode(String threeLetterCode) {
         return threeLetterCodeMap.get(threeLetterCode.toLowerCase());
     }
 
@@ -179,13 +179,5 @@ public enum Language {
         return lang;
     }
 
-  /**
-   *
-   * @param v
-   * @return
-   */
-  public static Language fromValue(String v) {
-        return valueOf(v.toUpperCase());
-    }
-
+  
 }

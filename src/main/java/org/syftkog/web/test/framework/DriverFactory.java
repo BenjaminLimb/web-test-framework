@@ -164,7 +164,7 @@ public class DriverFactory implements HasDriver {
 
       ChromeOptions options = new ChromeOptions();
       //options.setBinary(CHROME_DRIVER_PATH); // THIS DOESN"T WORK
-      System.setProperty("webdriver.chrome.driver",CHROME_DRIVER_PATH);
+      System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
       options.addArguments("--start-maximized");
 
       if (CHROME_PROFILE_PATH != null) {
@@ -255,7 +255,12 @@ public class DriverFactory implements HasDriver {
    * @param driver
    */
   public void returnDriver(Driver driver) {
-    availableDrivers.put(driver.hashCode(), driver);
+    if (recylceDrivers) {
+      availableDrivers.put(driver.hashCode(), driver);
+    } else {
+      driver.quit();
+    }
+
   }
 
   /**

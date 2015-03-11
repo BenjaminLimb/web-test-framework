@@ -37,8 +37,11 @@ public class Link extends Element<Link> {
    *
    */
   public void assertValidResponseCodeForHref() {
-    this.logAction("Assert valid http href response code:");
-    Assert.assertTrue(getResponseCodeForHref() < 400);
+    String href = getAttribute("href");
+    this.logAction("Assert  response code for href[" + href + "] < 400:");
+    Assert.assertTrue(!href.contains("undefined"),"href should not contain the string 'undefined'");
+    Assert.assertTrue(!href.contains("null"),"href should not contain the string 'null'");
+    Assert.assertTrue(getResponseCodeForHref(href) < 400);
   }
 
   /**
@@ -46,11 +49,8 @@ public class Link extends Element<Link> {
    *
    * @return
    */
-  public Integer getResponseCodeForHref() {
-
-    String href = getAttribute("href");
+  public Integer getResponseCodeForHref(String href) {
     return GeneralUtils.getResponseCode(href);
-
   }
 
 }

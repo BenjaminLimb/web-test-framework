@@ -1,0 +1,17 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Example UI Regression Tests" parallel="methods" thread-count="15">   
+    <test name="Example Acceptance Tests" junit="false">    
+        <groups>          
+            <run>       
+                <include name="regression"/>
+            </run>
+        </groups>    
+        <packages>
+            <package name="${groupId}.tests"/>      
+        </packages>
+    </test>  
+</suite>
