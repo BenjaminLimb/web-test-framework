@@ -182,7 +182,7 @@ public class Page<T extends Page> implements HasDriver, HasSearchContext {
             URL currentURL = new URL(getDriver().getCurrentUrl());
             String actualPath = currentURL.getPath();
             String expectedPath = new URL(url).getPath();
-            getDriver().getStepLogger().log(TRACE, "IsCorrectPage returning " + actualPath.contains(expectedPath) + " ActualPath:" + actualPath + " ExpectedPath:" + expectedPath);
+            getDriver().getStepLogger().log(TRACE, "IsCorrectPage returning " + actualPath.contains(expectedPath) + " ActualURL:" + currentURL.toString() + " ExpectedPath:" + expectedPath);
             return actualPath.contains(expectedPath);
         } catch (MalformedURLException ex) {
             throw new RuntimeException(ex);
