@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Automated UI Framework Unit Tests" parallel="methods" thread-count="50">   
+    <test name="unit-tests" junit="false">    
+        <groups>          
+            <run>       
+                <include name="unit"/>
+            </run>
+        </groups>    
+        <packages>            
+            <package name="org.syftkog.*"/>      
+        </packages>
+    </test>  
+</suite>
