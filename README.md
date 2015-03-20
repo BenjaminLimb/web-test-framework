@@ -11,7 +11,7 @@ mvn install -fweb-test-framework/archetype/pom.xml
 mvn archetype:generate -DarchetypeGroupId=org.syftkog.archetype -DarchetypeArtifactId=web-test-framework-archetype
 ```
 
-Or simply include the maven dependency in your existing project and use whatever you would like.
+Or simply include the maven dependency in your existing project pom.xml
 ```xml
 <dependency>
 	<groupId>org.syftkog</groupId>
