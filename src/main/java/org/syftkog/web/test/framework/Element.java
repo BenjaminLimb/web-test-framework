@@ -792,6 +792,7 @@ public class Element<T extends Element> implements Locatable, WrapsElement, Sear
           element = null; // Since it's stale, we clear it and let it start the loop over immediately        
         } catch (InvalidElementStateException | InvalidCookieDomainException | NotFoundException  | UnableToSetCookieException ex) {
           getDriver().getStepLogger().log(WARN, parentToString() + "\n" + ex.toString());
+          element = null;
           Driver.sleepForMilliseconds(ELEMENT_RETRY_INTERVAL_MILLISECONDS);
         } catch (WebDriverException ex) {
           if (ex.getMessage().contains("Element is not currently interactable and may not be manipulated")) {

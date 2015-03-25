@@ -38,7 +38,6 @@ public class PropertiesDataProvider {
       String auth_user = PropertiesRetriever.getString("propertiesDataProvider.authentication.username", null);
       String auth_pass = PropertiesRetriever.getString("propertiesDataProvider.authentication.password", null);
       String auth_key = PropertiesRetriever.getString("propertiesDataProvider.authentication.key", null);
-      
 
       for (String browserVersionPlatformKey : browserList) {
         for (String languageCode : languageList) {

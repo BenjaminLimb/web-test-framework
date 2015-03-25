@@ -10,10 +10,9 @@ import org.testng.annotations.Test;
  * 
  */
 
-
 public class BasicTest {
   
-  @Test(groups = {""}, dataProvider = "getTestConfigurations", dataProviderClass = PropertiesDataProvider.class)
+  @Test(groups = {"acceptance"}, dataProvider = "getTestConfigurations", dataProviderClass = PropertiesDataProvider.class)
   public void testExample(TestCaseContext context) {
     
     GoogleHomePage page = new GoogleHomePage(context);

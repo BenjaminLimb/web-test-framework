@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>    
+  <head>
+    <title>Shadow Dom Test Page</title>
+    <meta charset="UTF-8">      
+  </head>
+  <body>
+
+    <div id="nameTag">
+      <div class="first name">Bob</div>
+      <div class="last name">B. Love</div>
+      <div class="email">bob@</div>
+    </div>
+  <template id="nameTagTemplate">
+    <style>
+
+    </style>
+    <div style="background: green; padding: 1em;">
+      <div style="color: red;">
+        <content select=".first"></content>
+      </div>
+      <div style="color: yellow;">
+        <content select=".last"></content>
+      </div>
+      <div style="color: blue;">
+        <content select=""></content>
+      </div>
+      <div data-test="inShadow">My Shadow Content</div>
+    </div>
+  </template>
+
+
+  <script>
+    var shadow = document.querySelector('#nameTag').createShadowRoot();
+    var template = document.querySelector('#nameTagTemplate');
+    var clone = document.importNode(template.content, true);
+    shadow.appendChild(clone);
+  </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

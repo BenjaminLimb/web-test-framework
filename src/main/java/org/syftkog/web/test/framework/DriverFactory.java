@@ -163,7 +163,7 @@ public class DriverFactory implements HasDriver {
     } else if (browser.equalsIgnoreCase("chrome") && CHROME_DRIVER_PATH != null) {
 
       ChromeOptions options = new ChromeOptions();
-      //options.setBinary(CHROME_DRIVER_PATH); // THIS DOESN"T WORK
+      //options.setBinary(CHROME_DRIVER_PATH); // THIS DOESN'T WORK
       System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
       options.addArguments("--start-maximized");
 
