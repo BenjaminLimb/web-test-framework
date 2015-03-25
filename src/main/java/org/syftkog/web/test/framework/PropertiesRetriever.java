@@ -1,9 +1,8 @@
 package org.syftkog.web.test.framework;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map.Entry;
 import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,25 +29,23 @@ public class PropertiesRetriever {
    */
   public static Properties loadPropertiesFile() {
     Properties properties = new Properties();
-    InputStream input = null;
 
     try {
-      input = new FileInputStream("src/test/resources/config.properties");
-      properties.load(input);
-
-    } catch (IOException ex) {
-      LOG.debug(ex.toString());
-    } finally {
-      if (input != null) {
-        try {
-          input.close();
-        } catch (IOException e) {
-          LOG.debug(e.toString());
-        }
+      File propsFile = new File("src/test/resources/propertiesRetriever.properties");
+      if (propsFile.exists()) {
+        properties.load(new FileInputStream(propsFile));
+        LOG.trace("Loaded properties file " + "src/test/resources/propertiesRetriever.properties");
       }
+
+      File propsFileLocal = new File("src/test/resources/propertiesRetriever-local.properties");
+      if (propsFileLocal.exists()) {
+        properties.load(new FileInputStream(propsFileLocal));
+        LOG.trace("Loaded properties file " + "src/test/resources/propertiesRetriever-local.properties");
+      }
+    } catch (IOException ex) {
+      LOG.error("IOException", ex);
     }
-        
-    
+
     return properties;
   }
 

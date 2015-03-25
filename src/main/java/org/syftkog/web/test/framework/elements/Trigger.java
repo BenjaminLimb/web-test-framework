@@ -1,6 +1,9 @@
 package org.syftkog.web.test.framework.elements;
 
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import org.syftkog.web.test.framework.Element;
+import static org.syftkog.web.test.framework.Element.IMPLICIT_WAIT_TIME_IN_SECONDS;
 import org.syftkog.web.test.framework.HasDriver;
 import org.syftkog.web.test.framework.HasSearchContext;
 
@@ -74,12 +77,19 @@ public class Trigger extends Element<Trigger> {
       getDriver().logStep("TRIGGER OFF: " + toString());
     }
 
-    if (desiredValue != getTriggerState()) {
+    long timeout = System.currentTimeMillis() + IMPLICIT_WAIT_TIME_IN_SECONDS * 1000;
+
+    while (System.currentTimeMillis() < timeout && !Objects.equals(desiredValue, getTriggerState())) {
+
       if (this.clickUsingJavascript) {
         getDriver().executeScript("$('" + getElementSelector() + "').eq(0).mousedown().mouseup().click();");
       } else {
         click();
       }
+      LOG.trace("Attempt to set trigger to "+ desiredValue + " failed." );
+    }
+    if(!Objects.equals(desiredValue, getTriggerState())){
+      throw new RuntimeException("Failed to set trigger to "+ desiredValue);
     }
     return this;
   }
