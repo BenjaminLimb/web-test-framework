@@ -16,7 +16,7 @@
             </run>
         </groups>    
         <packages>
-            <package name="${package}.tests.*"/>      
+            <package name="${package}.*"/>      
         </packages>
     </test>  
 </suite>
