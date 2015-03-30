@@ -11,7 +11,7 @@
       <pattern>date="%date", level="%level", logger="%logger", %msg%n</pattern>
     </encoder>
   </appender>
-  <logger name="org.syftkog.web.test.framework" level="TRACE">        
+  <logger name="org.syftkog.web.test.framework" level="INFO">        
     <appender-ref ref="STDOUT"/>
     <appender-ref ref="FILE"/>
   </logger>
