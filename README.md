@@ -16,7 +16,7 @@ Or simply include the maven dependency in your existing project pom.xml
 <dependency>
 	<groupId>org.syftkog</groupId>
 	<artifactId>web-test-framework</artifactId>
-	<version>1.7.6</version>
+	<version>1.7.8</version>
 </dependency>
 
 ```
