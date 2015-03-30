@@ -32,8 +32,8 @@ public class Page<T extends Page> implements HasDriver, HasSearchContext {
   private final PageWaits<T> waitUntil = new PageWaits<>((T) this);
 
   /**
-   *
-   * @return
+   * 
+   * @return assertions for the page
    */
   public PageAssertions<T> assertPage() {
     return assertThatPage;
@@ -41,7 +41,7 @@ public class Page<T extends Page> implements HasDriver, HasSearchContext {
 
   /**
    *
-   * @return
+   * @return page specific wait methods
    */
   public PageWaits<T> waitUntil() {
     return waitUntil;
@@ -49,7 +49,7 @@ public class Page<T extends Page> implements HasDriver, HasSearchContext {
 
   /**
    *
-   * @return
+   * @return this (for chaining methods)
    */
   public T waitUntilLoaded() {
     return waitUntil().loaded();
@@ -57,15 +57,15 @@ public class Page<T extends Page> implements HasDriver, HasSearchContext {
 
   /**
    *
-   * @return
+   * @return are all the overridable load conditions met?
    */
   public Boolean isLoadConditionMet() {
     return true;
   }
 
   /**
-   *
-   * @param hasDriver
+   * 
+   * @param hasDriver 
    * @param url
    *
    */
@@ -125,7 +125,7 @@ public class Page<T extends Page> implements HasDriver, HasSearchContext {
     getDriver().logStep("GOTO: \"" + url + "\"");
 
     String navURL = url;
-    
+
     try {
       URL urlA = new URL(navURL);
       getDriver().navigate().to(urlA);
@@ -215,8 +215,8 @@ public class Page<T extends Page> implements HasDriver, HasSearchContext {
   }
 
   /**
-   *
-   * @return
+   * 
+   * @return - whether the driver is on the expected URL and all overridable load conditions are met.
    */
   public Boolean isLoaded() {
     Assert.assertNotNull(url, "isLoaded cannot be called without having a URL to check against.");

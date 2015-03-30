@@ -20,6 +20,10 @@ public class TestCaseParameters implements TagContext {
    */
   public TestCaseParameters() {
     params = new HashMap<>();
+    
+    // Default parameters
+    setBrowserVersionPlatform(BrowserVersionPlatform.WIN7FF);
+    
   }
 
   /**
