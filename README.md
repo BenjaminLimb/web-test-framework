@@ -1,5 +1,6 @@
 Introduction to using web-test-framework
 =================
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.syftkog/web-test-framework/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/org.syftkog/web-test-framework)
 
 This project is a framework for building Java Maven TestNG Selenium UI Tests that makes it easy to get started and provides robust functionality to help you write powerful automated web UI tests without a lot of code.
 
