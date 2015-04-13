@@ -102,7 +102,7 @@ public class ElementList<T extends Element> extends AbstractSequentialList<T> {
       final int elementIndex = i;
       WebElementFinder finder = new WebElementFinder() {
         @Override
-        public WebElement find() {        
+        public WebElement find() {
           reInitialize();
           return getWebElement(elementIndex);
         }
@@ -138,12 +138,12 @@ public class ElementList<T extends Element> extends AbstractSequentialList<T> {
   public T get(final int index) {
     return new webDriverRetryUntilTimeout<T>() {
       @Override
-      T commandsToRun() {
+      T commandsToRun() {        
         if (index >= elementList.size()) {
-          throw new NoSuchElementException("('" + listSelector + "[" + index + "]')");
+          throw new NoSuchElementException("('" + listSelector + " (instance[" + index + "])')");
         } else {
           T gElement = elementList.get(index);
-           
+
           return gElement;
         }
       }
