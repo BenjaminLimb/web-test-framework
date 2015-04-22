@@ -16,12 +16,12 @@ public class TestCaseContext implements WrapsTestCaseContext, HasDriver, TagCont
   @com.google.gson.annotations.Expose
   private TestCaseParameters testCaseParameters;
   
-  private DriverFactory driverFactory;
-  private Driver driver;
-  private StepLogger stepLogger = new StepLogger();
-  private int currentAttempt = 1;
-  private String name;
-  private ITestResult testResult;
+  private transient DriverFactory driverFactory;
+  private transient Driver driver;
+  private transient StepLogger stepLogger = new StepLogger();
+  private transient int currentAttempt = 1;
+  private  String name;
+  private transient ITestResult testResult;
   private ArrayList<String> tags;
 
   /**
