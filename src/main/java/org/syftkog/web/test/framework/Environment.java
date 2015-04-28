@@ -11,13 +11,16 @@ import org.slf4j.LoggerFactory;
  * @author BenjaminLimb
  */
 public class Environment {
-  
+
   /**
    *
    */
-  public final Logger LOG = LoggerFactory.getLogger(Environment.class);
+  public transient final Logger LOG = LoggerFactory.getLogger(Environment.class);
 
+  @com.google.gson.annotations.Expose
   private final EnvironmentType environmentType;
+
+  @com.google.gson.annotations.Expose
   private final URI uri;
 
   /**

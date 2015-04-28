@@ -9,10 +9,14 @@ package org.syftkog.web.test.framework;
  */
 public class Authentication {
 
+  @com.google.gson.annotations.Expose
   private String domain;
+  
+  @com.google.gson.annotations.Expose
   private String username;
-  private String password;
-  private String key;
+  
+  private transient String password;
+  private transient String key;
 
   /**
    *

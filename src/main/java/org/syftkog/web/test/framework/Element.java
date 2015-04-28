@@ -51,7 +51,7 @@ public class Element<T extends Element> implements Locatable, WrapsElement, Sear
   public static final long ELEMENT_RETRY_INTERVAL_MILLISECONDS = Long.parseLong(PropertiesRetriever.getString("element.actionRetryIntervalInMilliseconds", "100"));
 
   private final String elementName;
-  private final String elementSelector;
+  private String elementSelector;
   private final Driver driver;
   private final SearchContext searchContext;
   private WebElement element;
@@ -780,7 +780,8 @@ public class Element<T extends Element> implements Locatable, WrapsElement, Sear
      * @return
      */
     public T run() {
-      getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+      //getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+      // DON'T USE - see http://stackoverflow.com/questions/20268396/mixing-implicit-and-explicit-waits
       long timeout = System.currentTimeMillis() + IMPLICIT_WAIT_TIME_IN_SECONDS * 1000;
 
       while (System.currentTimeMillis() < timeout) {
@@ -830,9 +831,14 @@ public class Element<T extends Element> implements Locatable, WrapsElement, Sear
    * @param elementFinder
    * @return
    */
-  public Element setElementFinder(WebElementFinder elementFinder) {
+  public T setElementFinder(WebElementFinder elementFinder) {
     this.elementFinder = elementFinder;
-    return this;
+    return (T) this;
+  }
+  
+  protected T setElementSelector(String selector){
+    this.elementSelector = selector;
+    return (T) this;
   }
 
   /**
