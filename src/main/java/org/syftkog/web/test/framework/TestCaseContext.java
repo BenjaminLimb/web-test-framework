@@ -13,9 +13,7 @@ import org.testng.SkipException;
  */
 public class TestCaseContext implements WrapsTestCaseContext, HasDriver, TagContext, HasStepLogger, DriverContext<TestCaseContext>, RetryTestContext<TestCaseContext> {
 
-  @com.google.gson.annotations.Expose
   private TestCaseParameters testCaseParameters;
-  
   private transient DriverFactory driverFactory;
   private transient Driver driver;
   private transient StepLogger stepLogger = new StepLogger();

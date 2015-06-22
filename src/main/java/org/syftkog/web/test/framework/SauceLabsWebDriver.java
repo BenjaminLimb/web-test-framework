@@ -67,7 +67,7 @@ public class SauceLabsWebDriver extends RemoteWebDriver {
     Map<String, Object> updates = new HashMap<>();
     updates.put("passed", true);
     String toJSONString = JSONValue.toJSONString(escapedSteps);
-    updates.put("custom-data", "{steps:\"" + escapedSteps + "\"}");
+    //updates.put("custom-data", "{steps:\"" + escapedSteps + "\"}");
     //updates.put("custom-data", toJSONString);
     sauceREST.updateJobInfo(getSessionId().toString(), updates);
   }

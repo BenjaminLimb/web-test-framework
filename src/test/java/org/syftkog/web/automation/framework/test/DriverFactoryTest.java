@@ -3,6 +3,7 @@ package org.syftkog.web.automation.framework.test;
 import org.syftkog.web.test.framework.DriverFactory;
 import org.syftkog.web.test.framework.DesiredCapabilitiesFactory;
 import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -32,6 +33,16 @@ public class DriverFactoryTest {
     Assert.assertNotNull(driver);
     driver.quit();
   }
+  
+//  @Test
+//  public void testGetPhantomJS() {
+//    DesiredCapabilities caps = DesiredCapabilitiesFactory.phantomJS();
+//    PhantomJSDriver phantomJSDriver = new PhantomJSDriver(caps);
+//    phantomJSDriver.navigate().to("http://google.com");
+//    WebDriver driver = factory.getDriver(caps);
+//    Assert.assertNotNull(driver);
+//    driver.quit();
+//  }
 
   /**
    *

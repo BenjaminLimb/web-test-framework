@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.syftkog</groupId>
   <artifactId>web-test-framework</artifactId>
-  <version>1.7.10</version>
+  <version>1.7.12</version>
   <packaging>jar</packaging>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Web Automation Framework using Selenium WebDriver, TestNG with Sauce Labs suppport.</description>
@@ -116,8 +116,13 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>      
-    </dependency>                       
-       
+    </dependency>         
+<!--    Conflict with Selenium Version 1.45.0              -->
+<!--    <dependency>
+    <groupId>com.github.detro</groupId>
+    <artifactId>phantomjsdriver</artifactId>
+    <version>1.2.0</version>
+</dependency>-->
   </dependencies>
   <build>    
     <plugins>            

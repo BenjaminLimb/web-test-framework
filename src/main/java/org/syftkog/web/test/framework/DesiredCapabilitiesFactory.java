@@ -23,7 +23,7 @@ public class DesiredCapabilitiesFactory {
     }
 
     /**
-     * Mock Driver for testing
+     * HTML Unit Driver
      *
      * @return DesiredCapabilities instance for browser
      */
@@ -33,6 +33,17 @@ public class DesiredCapabilitiesFactory {
         return capabilities;
     }
 
+    /**
+     * Phantom JS Driver
+     *
+     * @return DesiredCapabilities instance for browser
+     */
+    public static DesiredCapabilities phantomJS() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setJavascriptEnabled(true);         
+        capabilities.setCapability("browserName", "phantomJS");
+        return capabilities;
+    }
     /**
      * Windows 8 - Internet Explorer 10
      *

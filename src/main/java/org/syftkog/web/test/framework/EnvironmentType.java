@@ -58,6 +58,9 @@ public enum EnvironmentType {
   public Environment load() {
     String key = "environments." + this.toString().toLowerCase() + ".default.host";
     String url = PropertiesRetriever.getString(key, null);
+    if(url == null){
+      throw new RuntimeException(key + " property could not be found.");
+    }
     return new Environment(this, url);
   }
 

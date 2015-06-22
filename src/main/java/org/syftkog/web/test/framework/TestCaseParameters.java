@@ -12,7 +12,6 @@ import org.testng.Assert;
  */
 public class TestCaseParameters implements TagContext {
 
-  @com.google.gson.annotations.Expose
   private HashMap<String, Object> params;
 
   /**
