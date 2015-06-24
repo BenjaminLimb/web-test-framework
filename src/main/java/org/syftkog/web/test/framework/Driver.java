@@ -618,6 +618,9 @@ public class Driver implements WebDriver, JavascriptExecutor, WrapsDriver, HasIn
    * @param environment
    */
   public void goToEnvironment(Environment environment) {
+    if(environment == null){
+      throw new RuntimeException("Environment must not be null.");
+    }
     if (!driver.getCurrentUrl().contains(environment.getHost())) {
       driver.navigate().to(environment.getURL());
     }

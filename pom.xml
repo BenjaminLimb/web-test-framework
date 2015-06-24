@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.syftkog</groupId>
   <artifactId>web-test-framework</artifactId>
-  <version>1.7.12</version>
+  <version>1.7.13</version>
   <packaging>jar</packaging>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Web Automation Framework using Selenium WebDriver, TestNG with Sauce Labs suppport.</description>
