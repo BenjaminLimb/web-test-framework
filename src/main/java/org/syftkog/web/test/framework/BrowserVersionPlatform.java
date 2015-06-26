@@ -43,6 +43,11 @@ public enum BrowserVersionPlatform {
   /**
    *
    */
+  SAFARI("safari", "safari", "any", Platform.MAC),
+  
+  /**
+   *
+   */
   HTMLUNIT("htmlunit", "htmlunit", "any", Platform.ANY),
 
   /**

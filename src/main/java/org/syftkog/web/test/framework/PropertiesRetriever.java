@@ -36,6 +36,11 @@ public class PropertiesRetriever {
         properties.load(new FileInputStream(propsFile));
         LOG.trace("Loaded properties file " + "src/test/resources/propertiesRetriever.properties");
       }
+      File propsFileMain = new File("src/main/resources/propertiesRetriever.properties");
+      if (propsFileMain.exists()) {
+        properties.load(new FileInputStream(propsFileMain));
+        LOG.trace("Loaded properties file " + "src/main/resources/propertiesRetriever.properties");
+      }
 
       File propsFileLocal = new File("src/test/resources/propertiesRetriever-local.properties");
       if (propsFileLocal.exists()) {
