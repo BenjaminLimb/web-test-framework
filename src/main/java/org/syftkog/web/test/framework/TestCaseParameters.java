@@ -118,6 +118,24 @@ public class TestCaseParameters implements TagContext {
     setParameter("browserName", browserName);
     return this;
   }
+  
+  /**
+   *
+   * @return
+   */
+  public String getExperiments() {
+    return (String) getParameter("experiments");
+  }
+
+  /**
+   *
+   * @param experiments
+   * @return
+   */
+  public TestCaseParameters setExperiments(String experiments) {
+    setParameter("experiments", experiments);
+    return this;
+  }
 
   /**
    *
