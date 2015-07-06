@@ -34,6 +34,7 @@ public class PropertiesDataProvider {
 
       String environmentType = PropertiesRetriever.getString("propertiesDataProvider.environment", null);
       String authenticate = PropertiesRetriever.getString("propertiesDataProvider.authenticate", null);
+      String experiments = PropertiesRetriever.getString("propertiesDataProvider.experiments", null);
 
       String auth_user = PropertiesRetriever.getString("propertiesDataProvider.authentication.username", null);
       String auth_pass = PropertiesRetriever.getString("propertiesDataProvider.authentication.password", null);
@@ -53,6 +54,10 @@ public class PropertiesDataProvider {
             if (windowDimension.toLowerCase().contains("x")) {
               params.setWindowSize(SeleniumHelperUtil.toDimension(windowDimension));
             }
+            
+            if(experiments != null){
+              params.setExperiments(experiments);
+            }
 
             if (environmentType != null) {
               try {
@@ -71,7 +76,7 @@ public class PropertiesDataProvider {
               auth.setKey(auth_key);
 
               params.setAuthentication(auth);
-            }
+            }                        
 
             returnSet.add(params);
           }
