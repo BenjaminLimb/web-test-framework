@@ -179,8 +179,9 @@ public class DriverFactory implements HasDriver {
 
     } else if (browser.equalsIgnoreCase("htmlunit")) {
       driver = new HtmlUnitDriver(true);
-    } else if (browser.equalsIgnoreCase("phantomJS")) {
-      DesiredCapabilities phantomCapabilites = new DesiredCapabilities();
+    } else if (browser.equalsIgnoreCase("phantomjs")) {
+      DesiredCapabilities phantomCapabilites = new DesiredCapabilities();     
+      phantomCapabilites.setJavascriptEnabled(true); 
       phantomCapabilites.setCapability("phantomjs.binary.path", PHANTOM_JS_DRIVER_PATH);
       driver = new PhantomJSDriver(phantomCapabilites);
     } else if (browser.equalsIgnoreCase("mock")) {

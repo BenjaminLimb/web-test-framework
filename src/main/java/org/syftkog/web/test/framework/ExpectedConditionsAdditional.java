@@ -90,51 +90,63 @@ public class ExpectedConditionsAdditional {
     };
   }
 
-  
-  // TODO: NEEDS TESTING AND VERIFICATION
+// See: http://stackoverflow.com/questions/25062969/testing-angularjs-with-selenium
+  public static Boolean isDocumentReadyCompleteAndjQueryCompleteAndAngularNotActive(WebDriver driver, String angularElementSelector) {
+    //String angularElementSelector = "[data-ng-app]";
+
+    String script = ""
+            + "    try {\n"
+            + "        if (document.readyState !== 'complete') {\n"
+            + "            return false;\n"
+            + "        }\n"
+            + "        if (window.jQuery) {\n"
+            + "            if (window.jQuery.active) {\n"
+            + "                return false;\n"
+            + "            }\n"
+            + "            else if (window.jQuery.ajax && window.jQuery.ajax.active) {\n"
+            + "                return false;\n"
+            + "            }\n"
+            + "        }\n"
+            + "\n"
+            + "        if (window.angular) {\n"
+            + "            if (!window.qa) {\n"
+            + "                window.qa = {\n"
+            + "                    doneRendering: false\n"
+            + "                };\n"
+            + "            }\n"
+            + "            var injector = window.angular.element('[data-ng-app]').injector();\n"
+            + "\n"
+            + "            var $rootScope = injector.get('$rootScope');\n"
+            + "            var $http = injector.get('$http');\n"
+            + "            var $timeout = injector.get('$timeout');\n"
+            + "            if ($rootScope.$$phase === '$apply' || $rootScope.$$phase === '$digest' || $http.pendingRequests.length !== 0) {\n"
+            + "                window.qa.doneRendering = false;\n"
+            + "                return false;\n"
+            + "            }\n"
+            + "            if (!window.qa.doneRendering) {\n"
+            + "                $timeout(function () {\n"
+            + "                    window.qa.doneRendering = true;\n"
+            + "                }, 0);\n"
+            + "                return false;\n"
+            + "            }\n"
+            + "        }\n"
+            + "        return true;\n"
+            + "    }\n"
+            + "    catch (ex) {\n"
+            + "        return false;\n"
+            + "    }\n"
+            + "";
+    Object result = ((JavascriptExecutor) driver).executeScript(script);
+
+    return (Boolean) result;
+  }
+
   //http://stackoverflow.com/questions/25062969/testing-angularjs-with-selenium
   public static ExpectedCondition<Boolean> documentReadyCompleteAndjQueryCompleteAndAngularNotActive(final String angularElementSelector) {
     return new ExpectedCondition<Boolean>() {
       @Override
       public Boolean apply(WebDriver driver) {
-        String script = "try {"
-                + "  if (document.readyState !== 'complete') {"
-                + "    return false; // Page not loaded yet"
-                + "  }"
-                + "  if (window.jQuery) {"
-                + "    if (window.jQuery.active) {"
-                + "      return false;"
-                + "    } else if (window.jQuery.ajax && window.jQuery.ajax.active) {"
-                + "      return false;"
-                + "    }"
-                + "  }"
-                + "  if (window.angular) {"
-                + "    if (!window.qa) {"
-                + "      window.qa = {"
-                + "        doneRendering: false"
-                + "      };"
-                + "    }"
-                + "    var injector = window.angular.element('" + angularElementSelector + "').injector();"
-                + "    // Store providers to use for these checks"
-                + "    var $rootScope = injector.get('$rootScope');"
-                + "    var $http = injector.get('$http');"
-                + "    var $timeout = injector.get('$timeout');"                
-                + "    if ($rootScope.$$phase === '$apply' || $rootScope.$$phase === '$digest' || $http.pendingRequests.length !== 0) {"
-                + "      window.qa.doneRendering = false;"
-                + "      return false; // Angular digesting or loading data"
-                + "    }"
-                + "    if (!window.qa.doneRendering) {"
-                + "      $timeout(function() {"
-                + "        window.qa.doneRendering = true;"
-                + "      }, 0);"
-                + "      return false;"
-                + "    }"
-                + "  }"
-                + "  return true;"
-                + "} catch (ex) {"
-                + "  return false;"
-                + "}";
-        return (Boolean) ((JavascriptExecutor) driver).executeScript(script);
+        return isDocumentReadyCompleteAndjQueryCompleteAndAngularNotActive(driver, angularElementSelector);
       }
 
     };
