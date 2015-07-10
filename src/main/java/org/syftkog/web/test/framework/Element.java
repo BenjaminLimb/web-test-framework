@@ -164,7 +164,7 @@ public class Element<T extends Element> implements Locatable, WrapsElement, Sear
     }
   }
 
-  private void initializeElement() {
+  public void initializeElement() {
     this.element = findWebElement();
     Assert.assertNotNull(element);
   }
