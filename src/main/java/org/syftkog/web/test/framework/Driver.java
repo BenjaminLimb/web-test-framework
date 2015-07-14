@@ -1,12 +1,15 @@
 package org.syftkog.web.test.framework;
 
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.apache.commons.io.FileUtils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
@@ -618,6 +621,9 @@ public class Driver implements WebDriver, JavascriptExecutor, WrapsDriver, HasIn
    * @param environment
    */
   public void goToEnvironment(Environment environment) {
+    if(environment == null){
+      throw new RuntimeException("Environment must not be null.");
+    }
     if (!driver.getCurrentUrl().contains(environment.getHost())) {
       driver.navigate().to(environment.getURL());
     }
@@ -661,4 +667,16 @@ public class Driver implements WebDriver, JavascriptExecutor, WrapsDriver, HasIn
   public void setEnvironment(Environment environment) {
     this.environment = environment;
   }
+  
+  
+  public void takeScreenshot( String filename){
+//        driver.manage().window().setSize( new Dimension( 1024, 2048) ); // Set window size of image capture, otherwise will likely be small (Need to figure out how to capture entire window at specified width)
+        
+    File scrShot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try{
+            FileUtils.copyFile(scrShot, new File("./target/"+filename+".png")); //Not sure if PNG is always the output type or how to change it if it isn't
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 }

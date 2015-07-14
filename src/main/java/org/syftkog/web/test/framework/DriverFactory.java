@@ -18,6 +18,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -178,6 +179,11 @@ public class DriverFactory implements HasDriver {
 
     } else if (browser.equalsIgnoreCase("htmlunit")) {
       driver = new HtmlUnitDriver(true);
+    } else if (browser.equalsIgnoreCase("phantomjs")) {
+      DesiredCapabilities phantomCapabilites = new DesiredCapabilities();     
+      phantomCapabilites.setJavascriptEnabled(true); 
+      phantomCapabilites.setCapability("phantomjs.binary.path", PHANTOM_JS_DRIVER_PATH);
+      driver = new PhantomJSDriver(phantomCapabilites);
     } else if (browser.equalsIgnoreCase("mock")) {
       driver = new MockWebDriver();
     } else {

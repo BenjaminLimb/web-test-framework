@@ -16,11 +16,7 @@ public class Environment {
    *
    */
   public transient final Logger LOG = LoggerFactory.getLogger(Environment.class);
-
-  @com.google.gson.annotations.Expose
   private final EnvironmentType environmentType;
-
-  @com.google.gson.annotations.Expose
   private final URI uri;
 
   /**
@@ -40,7 +36,12 @@ public class Environment {
    */
   public Environment(EnvironmentType environmentType, String url) {
     this.environmentType = environmentType;
-    this.uri = URI.create(url);
+    if (url != null) {
+        this.uri = URI.create(url);
+    } else {
+      throw new RuntimeException("url cannot be null.");
+    }
+
   }
 
   /**

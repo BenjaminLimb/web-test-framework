@@ -98,7 +98,7 @@ public class GeneralUtils {
     * @param text
     * @return 
     */
-   public String urlEncode(String text) {
+   public static String urlEncode(String text) {
     try {
       text = URLEncoder.encode(text, "UTF-8");
       text = text.replaceAll("\\+", "%20");

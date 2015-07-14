@@ -34,7 +34,8 @@ public class PropertiesDataProvider {
 
       String environmentType = PropertiesRetriever.getString("propertiesDataProvider.environment", null);
       String authenticate = PropertiesRetriever.getString("propertiesDataProvider.authenticate", null);
-      
+      String experiments = PropertiesRetriever.getString("propertiesDataProvider.experiments", null);
+
       String auth_user = PropertiesRetriever.getString("propertiesDataProvider.authentication.username", null);
       String auth_pass = PropertiesRetriever.getString("propertiesDataProvider.authentication.password", null);
       String auth_key = PropertiesRetriever.getString("propertiesDataProvider.authentication.key", null);
@@ -53,20 +54,29 @@ public class PropertiesDataProvider {
             if (windowDimension.toLowerCase().contains("x")) {
               params.setWindowSize(SeleniumHelperUtil.toDimension(windowDimension));
             }
+            
+            if(experiments != null){
+              params.setExperiments(experiments);
+            }
 
             if (environmentType != null) {
-              params.setEnvironment(EnvironmentType.valueOf(environmentType.toUpperCase()).load());
+              try {
+                Environment env = EnvironmentType.valueOf(environmentType.toUpperCase()).load();
+                params.setEnvironment(env);
+              } catch (RuntimeException e) {
+                throw new RuntimeException("Error initializing environment " + environmentType, e);
+              }
             }
 
             if (authenticate != null) {
               params.setAuthenticate(authenticate.equalsIgnoreCase("true"));
             }
-             if (auth_user != null) {               
-               Authentication auth = new Authentication(auth_user,auth_pass);
-               auth.setKey(auth_key);
-               
-               params.setAuthentication(auth);              
-            }
+            if (auth_user != null) {
+              Authentication auth = new Authentication(auth_user, auth_pass);
+              auth.setKey(auth_key);
+
+              params.setAuthentication(auth);
+            }                        
 
             returnSet.add(params);
           }

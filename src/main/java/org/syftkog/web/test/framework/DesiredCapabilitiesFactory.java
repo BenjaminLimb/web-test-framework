@@ -23,7 +23,7 @@ public class DesiredCapabilitiesFactory {
     }
 
     /**
-     * Mock Driver for testing
+     * HTML Unit Driver
      *
      * @return DesiredCapabilities instance for browser
      */
@@ -33,6 +33,17 @@ public class DesiredCapabilitiesFactory {
         return capabilities;
     }
 
+    /**
+     * Phantom JS Driver
+     *
+     * @return DesiredCapabilities instance for browser
+     */
+    public static DesiredCapabilities phantomJS() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setJavascriptEnabled(true);         
+        capabilities.setCapability("browserName", "phantomJS");
+        return capabilities;
+    }
     /**
      * Windows 8 - Internet Explorer 10
      *
@@ -122,14 +133,14 @@ public class DesiredCapabilitiesFactory {
     }
 
     /**
-     * OS X 10.6 Safari 5
+     * OS X 10.10 Safari 8
      *
      * @return DesiredCapabilities instance for browser
      */
-    public static DesiredCapabilities safari5mac() {
+    public static DesiredCapabilities safari() {
         DesiredCapabilities capabilities = DesiredCapabilities.safari();
-        capabilities.setCapability("platform", "OS X 10.6");
-        capabilities.setCapability("version", "5");
+        capabilities.setCapability("platform", "OS X 10.10");
+        capabilities.setCapability("version", "8.0");
         return capabilities;
     }
 

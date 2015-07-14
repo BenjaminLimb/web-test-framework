@@ -17,9 +17,9 @@ import org.apache.http.impl.cookie.BestMatchSpecFactory;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HttpContext;
-
-//import sun.misc.BASE64Encoder;
 import org.apache.commons.codec.binary.Base64;
+
+
 
 import java.io.*;
 import java.net.HttpURLConnection;

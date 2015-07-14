@@ -12,7 +12,6 @@ import org.testng.Assert;
  */
 public class TestCaseParameters implements TagContext {
 
-  @com.google.gson.annotations.Expose
   private HashMap<String, Object> params;
 
   /**
@@ -117,6 +116,24 @@ public class TestCaseParameters implements TagContext {
    */
   public TestCaseParameters setBrowserName(String browserName) {
     setParameter("browserName", browserName);
+    return this;
+  }
+  
+  /**
+   *
+   * @return
+   */
+  public String getExperiments() {
+    return (String) getParameter("experiments");
+  }
+
+  /**
+   *
+   * @param experiments
+   * @return
+   */
+  public TestCaseParameters setExperiments(String experiments) {
+    setParameter("experiments", experiments);
     return this;
   }
 
