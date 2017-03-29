@@ -74,7 +74,7 @@ public class DriverTest {
   /**
    *
    */
-  @Test(groups = "unit")
+  @Test(groups = "local")
   public void testNavigateBack() {
     Driver driver = new DriverFactory().getDriver(BrowserVersionPlatform.WIN7FF);
     
@@ -95,7 +95,7 @@ public class DriverTest {
   /**
    *
    */
-  @Test(groups = "unit")
+  @Test(groups = "local")
   public void testNavigationDetection() {
     Driver driver = new DriverFactory().getDriver(BrowserVersionPlatform.WIN7FF);
     

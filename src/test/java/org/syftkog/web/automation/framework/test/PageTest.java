@@ -17,7 +17,7 @@ public class PageTest {
   /**
    *
    */
-  @Test(groups = "unit")
+  @Test(groups = "local")
     public void intatiateSimplePage() {
         Driver driver = factory.getDriver();
         HomePage page = new HomePage(driver, "http://google.com", true);

@@ -17,7 +17,7 @@ public class TestCaseContextTest {
   /**
    *
    */
-  @Test(groups = "unit")
+  @Test(groups = "local")
     public void testSetWindowSize() {
         DriverFactory factory = new DriverFactory();
         Dimension dimension = new Dimension(400, 600);

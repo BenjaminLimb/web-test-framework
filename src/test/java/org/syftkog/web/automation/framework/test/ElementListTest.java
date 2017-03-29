@@ -18,7 +18,7 @@ public class ElementListTest {
   /**
    *
    */
-  @Test(groups = "unit")
+  @Test(groups = "unit-disabled")
   public void testBasicUsage() {
     DriverFactory factory = new DriverFactory();
     Driver driver = factory.getDriver();
@@ -32,7 +32,7 @@ public class ElementListTest {
 
   /**
    */
-  @Test(groups = "unit")
+  @Test(groups = "unit-disabled")
   public void testForStaleStateWithPattern() {
     DriverFactory factory = new DriverFactory();
     Driver driver = factory.getDriver();
@@ -59,7 +59,7 @@ public class ElementListTest {
   /**
    *
    */
-  @Test(groups = "unit")
+  @Test(groups = "unit-disabled")
   public void testForStaleStateWithoutPattern() {
     DriverFactory factory = new DriverFactory();
     Driver driver = factory.getDriver();

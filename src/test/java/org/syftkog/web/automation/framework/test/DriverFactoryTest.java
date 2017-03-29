@@ -21,7 +21,7 @@ public class DriverFactoryTest {
   /**
    *
    */
-  @Test(groups = "unit")
+  @Test(groups = "local")
   public void testGetDriver() {
     WebDriver driver = factory.getDriver();
     Assert.assertNotNull(driver);

@@ -19,7 +19,7 @@ public class ElementTest {
   /**
    *
    */
-  @Test(groups = "unit")
+  @Test(groups = "unit-disabled")
   public void testChildElement() {
     Driver driver = new DriverFactory().getDriver(BrowserVersionPlatform.WIN7FF);
 
@@ -37,7 +37,7 @@ public class ElementTest {
   /**
    *
    */
-  @Test(groups = "unit")
+  @Test(groups = "unit-disabled")
   public void testClickAndLoadPageFromClassDefinition() {
     Driver driver = new DriverFactory().getDriver(BrowserVersionPlatform.WIN7FF);
 
@@ -51,7 +51,7 @@ public class ElementTest {
   /**
    *
    */
-  @Test(groups = "unit")
+  @Test(groups = "unit-disabled")
   public void testClickAndLoadPageFromPageInstance() {
     Driver driver = new DriverFactory().getDriver(BrowserVersionPlatform.WIN7FF);
 
