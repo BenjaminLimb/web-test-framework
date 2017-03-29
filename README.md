@@ -1,6 +1,8 @@
 Introduction to using web-test-framework
 =================
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.syftkog/web-test-framework/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/org.syftkog/web-test-framework)
+* The maven central dependency is out of date since I am not longer actively maintaining the framework. 
+
 
 This project is a framework for building Java Maven TestNG Selenium UI Tests that makes it easy to get started and provides robust functionality to help you write powerful automated web UI tests without a lot of code.
 
@@ -13,6 +15,9 @@ mvn archetype:generate -DarchetypeGroupId=org.syftkog.archetype -DarchetypeArtif
 ```
 
 Or simply include the maven dependency in your existing project pom.xml
+
+* The maven central dependency is out of date since I am not longer actively maintaining the framework. 
+
 ```xml
 <dependency>
 	<groupId>org.syftkog</groupId>
